@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mâu Thuẫn Thế Hệ Trong Gia Đình Số</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f1e3c 0%, #1a3a52 100%);
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* A0 Poster Dimensions: 84.1cm × 118.9cm = 1189mm × 841mm */
+        .poster-container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+            border-bottom: 6px solid #e74c3c;
+            position: relative;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><defs><pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.5;
+        }
+
+        .header h1 {
+            font-size: 3.5em;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 1;
+        }
+
+        .header p {
+            font-size: 1.3em;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+        }
+
+        .university-info {
+            position: absolute;
+            top: 15px;
+            right: 30px;
+            font-size: 0.8em;
+            opacity: 0.8;
+            color: #ecf0f1;
+        }
+
+        /* Main Content Grid */
+        .content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            padding: 50px 40px;
+            align-items: start;
+        }
+
+        .section {
+            position: relative;
+        }
+
+        .section-title {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #3498db;
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-icon {
+            font-size: 1.4em;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            color: white;
+            border-radius: 50%;
+        }
+
+        /* Timeline Section */
+        .timeline {
+            position: relative;
+            display: flex;
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .timeline-column {
+            flex: 1;
+            position: relative;
+        }
+
+        .timeline-title {
+            font-weight: 700;
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            color: #2c3e50;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .timeline-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-size: 1.5em;
+            background: #ecf0f1;
+        }
+
+        .timeline-items {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .timeline-item {
+            padding: 12px 15px;
+            background: #f8f9fa;
+            border-left: 4px solid #3498db;
+            border-radius: 4px;
+            font-size: 0.95em;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-item:hover {
+            background: #e8f4f8;
+            transform: translateX(5px);
+        }
+
+        /* Value Differences */
+        .value-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .value-box {
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.95em;
+        }
+
+        .value-traditional {
+            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+            color: white;
+        }
+
+        .value-modern {
+            background: linear-gradient(135deg, #27ae60 0%, #229954 100%);
+            color: white;
+        }
+
+        /* Contradiction Visualization */
+        .contradiction-visual {
+            position: relative;
+            height: 300px;
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #f8f9fa 0%, #ecf0f1 100%);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .contradiction-circle {
+            position: absolute;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+
+        .circle-parent {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            left: 15%;
+            animation: float-left 3s ease-in-out infinite;
+        }
+
+        .circle-child {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            right: 15%;
+            animation: float-right 3s ease-in-out infinite;
+        }
+
+        .circle-label {
+            font-size: 0.8em;
+            text-align: center;
+        }
+
+        @keyframes float-left {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+        }
+
+        @keyframes float-right {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(15px); }
+        }
+
+        .contradiction-center {
+            position: absolute;
+            text-align: center;
+            color: #2c3e50;
+            z-index: 10;
+        }
+
+        .contradiction-center h3 {
+            font-size: 1.1em;
+            margin-bottom: 8px;
+        }
+
+        .contradiction-center p {
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+
+        /* Statistics Section */
+        .stats-section {
+            grid-column: 1 / -1;
+            background: linear-gradient(135deg, #f8f9fa 0%, #ecf0f1 100%);
+            padding: 40px;
+            border-radius: 12px;
+            border-left: 5px solid #e74c3c;
+        }
+
+        .stats-title {
+            font-size: 1.6em;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 25px 15px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+        }
+
+        .stat-number {
+            font-size: 2.2em;
+            font-weight: 700;
+            color: #e74c3c;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            font-size: 0.9em;
+            color: #7f8c8d;
+            line-height: 1.4;
+        }
+
+        /* Key Findings */
+        .findings-section {
+            grid-column: 1 / -1;
+            background: linear-gradient(135deg, #ecf0f1 0%, #bdc3c7 100%);
+            padding: 40px;
+            border-radius: 12px;
+            border-left: 5px solid #3498db;
+        }
+
+        .findings-title {
+            font-size: 1.6em;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 25px;
+        }
+
+        .findings-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+
+        .finding-item {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #27ae60;
+        }
+
+        .finding-item.negative {
+            border-left-color: #e74c3c;
+        }
+
+        .finding-item.neutral {
+            border-left-color: #f39c12;
+        }
+
+        .finding-label {
+            font-size: 0.85em;
+            color: #7f8c8d;
+            font-weight: 600;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .finding-text {
+            font-size: 1em;
+            color: #2c3e50;
+            font-weight: 600;
+            line-height: 1.5;
+        }
+
+        /* Solutions Section */
+        .solutions-section {
+            grid-column: 1 / -1;
+            background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 12px;
+            margin-top: 20px;
+        }
+
+        .solutions-title {
+            font-size: 1.6em;
+            font-weight: 700;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .solutions-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .solution-item {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 8px;
+            border-top: 3px solid #3498db;
+            backdrop-filter: blur(10px);
+        }
+
+        .solution-item h4 {
+            font-size: 1.1em;
+            margin-bottom: 12px;
+            color: #3498db;
+        }
+
+        .solution-item p {
+            font-size: 0.95em;
+            line-height: 1.6;
+            opacity: 0.95;
+        }
+
+        /* Footer */
+        .footer {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 20px;
+            color: #7f8c8d;
+            font-size: 0.9em;
+            border-top: 2px solid #ecf0f1;
+            margin-top: 20px;
+        }
+
+        /* Communication Regulation */
+        .regulation-box {
+            background: linear-gradient(135deg, #e8f4f8 0%, #d1e8f0 100%);
+            border: 2px solid #3498db;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+
+        .regulation-box h4 {
+            color: #2980b9;
+            margin-bottom: 12px;
+            font-size: 1.1em;
+        }
+
+        .regulation-box p {
+            color: #2c3e50;
+            line-height: 1.6;
+            font-size: 0.95em;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .content {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .solutions-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header h1 {
+                font-size: 2.5em;
+            }
+        }
+
+        .presentation-script {
+            display: none;
+            background: #f8f9fa;
+            padding: 40px;
+            margin-top: 30px;
+            border-radius: 8px;
+            line-height: 1.8;
+        }
+
+        .presentation-script.active {
+            display: block;
+        }
+
+        .script-section {
+            margin-bottom: 25px;
+        }
+
+        .script-section h3 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        .script-section p {
+            color: #555;
+            margin-bottom: 8px;
+            font-size: 0.95em;
+        }
+
+        .toggle-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1em;
+            box-shadow: 0 8px 20px rgba(231, 76, 60, 0.4);
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+
+        .toggle-button:hover {
+            background: #c0392b;
+            transform: scale(1.05);
+            box-shadow: 0 12px 30px rgba(231, 76, 60, 0.6);
+        }
+    </style>
+</head>
+<body>
+    <div class="poster-container">
+        <div class="header">
+            <div class="university-info">FPT University - SE1829</div>
+            <h1>📱 Mâu Thuẫn Thế Hệ Trong Gia Đình Số</h1>
+            <p>Khác biệt cha mẹ - con cái: Tuổi tác hay Điều kiện xã hội?</p>
+        </div>
+
+        <div class="content">
+            <!-- Section 1: Socialization Conditions -->
+            <div class="section">
+                <div class="section-title">
+                    <span class="section-icon">👨‍👩‍👧‍👦</span>
+                    Khác Biệt Điều Kiện Xã Hội Hóa
+                </div>
+                <div class="timeline">
+                    <div class="timeline-column">
+                        <div class="timeline-title">
+                            <div class="timeline-icon">👴</div>
+                            <span>Thế Hệ Cha Mẹ</span>
+                        </div>
+                        <div class="timeline-items">
+                            <div class="timeline-item">📚 Học tập: Sách vở, lớp học truyền thống</div>
+                            <div class="timeline-item">📰 Thông tin: Báo giấy, TV, nghe kể</div>
+                            <div class="timeline-item">👥 Giao tiếp: Face-to-face, điện thoại cố định</div>
+                            <div class="timeline-item">💼 Nghề nghiệp: Ổn định, lâu dài, 1 công ty</div>
+                            <div class="timeline-item">🎯 Giá trị: Trách nhiệm tập thể, tuân thủ</div>
+                        </div>
+                    </div>
+                    <div class="timeline-column">
+                        <div class="timeline-title">
+                            <div class="timeline-icon">👧</div>
+                            <span>Thế Hệ Con Cái</span>
+                        </div>
+                        <div class="timeline-items">
+                            <div class="timeline-item">📱 Học tập: Online, app, video, collaboration</div>
+                            <div class="timeline-item">🌐 Thông tin: Google, TikTok, YouTube, trend</div>
+                            <div class="timeline-item">💬 Giao tiếp: Mạng xã hội, groups, livestream</div>
+                            <div class="timeline-item">🚀 Nghề nghiệp: Flexible, freelance, portfolio</div>
+                            <div class="timeline-item">✨ Giá trị: Tự chủ, khám phá, thể hiện bản thân</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 2: Digital Environment -->
+            <div class="section">
+                <div class="section-title">
+                    <span class="section-icon">🌍</span>
+                    Khác Biệt Môi Trường Số
+                </div>
+                <div class="value-grid" style="margin-bottom: 20px;">
+                    <div class="value-box value-traditional">
+                        <div style="font-size: 1.8em; margin-bottom: 8px;">📵</div>
+                        <div>Digital Immigrants</div>
+                        <div style="font-size: 0.85em; margin-top: 5px; opacity: 0.9;">Thích nghi từ sau</div>
+                    </div>
+                    <div class="value-box value-modern">
+                        <div style="font-size: 1.8em; margin-bottom: 8px;">📱</div>
+                        <div>Digital Natives</div>
+                        <div style="font-size: 0.85em; margin-top: 5px; opacity: 0.9;">Lớn lên cùng</div>
+                    </div>
+                </div>
+                <div style="background: white; padding: 20px; border-radius: 8px; border: 1px solid #ecf0f1;">
+                    <h4 style="color: #2c3e50; margin-bottom: 15px; font-weight: 600;">📊 Cảm Nhận Khác Biệt</h4>
+                    <div style="font-size: 0.95em; color: #555; line-height: 1.8;">
+                        <div style="margin-bottom: 10px;"><strong>76.2%</strong> con cái dùng Internet ≥3 giờ/ngày</div>
+                        <div style="margin-bottom: 10px;"><strong>3.823/5</strong> điểm: Cha mẹ khó theo kịp thay đổi</div>
+                        <div style="margin-bottom: 10px;"><strong>33.5%</strong> bất đồng liên quan trực tiếp đến mạng</div>
+                        <div><strong>3.707/5</strong> điểm: Cha mẹ đánh giá tiêu cực việc dùng điện thoại</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 3: Value Differences -->
+            <div class="section">
+                <div class="section-title">
+                    <span class="section-icon">⚡</span>
+                    Khác Biệt Giá Trị → Mâu Thuẫn
+                </div>
+                <div style="background: white; padding: 20px; border-radius: 8px; border: 2px solid #e74c3c; margin-top: 15px;">
+                    <h4 style="color: #e74c3c; margin-bottom: 15px; text-align: center; font-size: 1.2em;">🔴 Điểm Bất Đồng Chính</h4>
+                    <div class="value-grid">
+                        <div style="padding: 15px; background: #fdeaea; border-radius: 6px; text-align: center; border-left: 4px solid #e74c3c;">
+                            <div style="font-weight: 600; color: #2c3e50; margin-bottom: 5px;">📚 Học tập</div>
+                            <div style="font-size: 0.9em; color: #555;">Sự chuẩn bị vs Trải nghiệm</div>
+                        </div>
+                        <div style="padding: 15px; background: #fdeaea; border-radius: 6px; text-align: center; border-left: 4px solid #e74c3c;">
+                            <div style="font-weight: 600; color: #2c3e50; margin-bottom: 5px;">💼 Nghề nghiệp</div>
+                            <div style="font-size: 0.9em; color: #555;">Ổn định vs Phát triển</div>
+                        </div>
+                        <div style="padding: 15px; background: #fdeaea; border-radius: 6px; text-align: center; border-left: 4px solid #e74c3c;">
+                            <div style="font-weight: 600; color: #2c3e50; margin-bottom: 5px;">👥 Bạn bè & Tình yêu</div>
+                            <div style="font-size: 0.9em; color: #555;">Kiểm soát vs Tự chủ</div>
+                        </div>
+                        <div style="padding: 15px; background: #fdeaea; border-radius: 6px; text-align: center; border-left: 4px solid #e74c3c;">
+                            <div style="font-weight: 600; color: #2c3e50; margin-bottom: 5px;">⏰ Thời gian & Điện thoại</div>
+                            <div style="font-size: 0.9em; color: #555;">Kỷ luật vs Tự quản lý</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="regulation-box">
+                    <h4>📈 Tương Quan Mạnh Nhất</h4>
+                    <p><strong>r = 0.615 (p < 0.01)</strong> - Khác biệt giá trị tác động mạnh nhất đến mâu thuẫn thế hệ</p>
+                </div>
+            </div>
+
+            <!-- Section 4: Communication -->
+            <div class="section">
+                <div class="section-title">
+                    <span class="section-icon">💬</span>
+                    Giao Tiếp Gia Đình: Điều Tiết Mâu Thuẫn
+                </div>
+                
+                <div style="background: white; padding: 20px; border-radius: 8px; border: 2px solid #27ae60; margin-top: 15px;">
+                    <h4 style="color: #27ae60; margin-bottom: 15px; text-align: center; font-size: 1.2em;">✅ Giao Tiếp Cởi Mở Làm GÌ?</h4>
+                    
+                    <div style="background: linear-gradient(135deg, #e8f8f5 0%, #d5f4e6 100%); padding: 15px; border-radius: 6px; border-left: 4px solid #27ae60; margin-bottom: 15px;">
+                        <div style="font-weight: 600; color: #27ae60; margin-bottom: 8px;">🎯 Tác động trực tiếp giảm mâu thuẫn</div>
+                        <div style="color: #2c3e50; font-size: 0.95em;">B = -0.260 (p < 0.001)</div>
+                        <div style="color: #555; font-size: 0.9em; margin-top: 5px;">Lắng nghe trước, giải thích sau, thương lượng cuối</div>
+                    </div>
+
+                    <div style="background: #f0f7ff; padding: 15px; border-radius: 6px; border-left: 4px solid #3498db;">
+                        <div style="font-weight: 600; color: #2980b9; margin-bottom: 10px;">🔄 3 Bước Đối Thoại</div>
+                        <ol style="color: #2c3e50; font-size: 0.95em; line-height: 1.8; padding-left: 20px;">
+                            <li><strong>Lắng nghe:</strong> Hỏi động cơ, không phán xét ngay</li>
+                            <li><strong>Giải thích:</strong> Chia sẻ nỗi lo, lý do kiểm soát</li>
+                            <li><strong>Thương lượng:</strong> Thống nhất quy tắc cùng nhau</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 5: Statistics -->
+            <div class="stats-section">
+                <div class="stats-title">📊 Dữ Liệu Nghiên Cứu (164 người + 7 cặp gia đình)</div>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">68.3%</div>
+                        <div class="stat-label">Nhóm tuổi 19-22 (Sinh viên)</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">73.2%</div>
+                        <div class="stat-label">Từ thành thị (Hồ Chí Minh)</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">55.5%</div>
+                        <div class="stat-label">Sống cùng cả cha và mẹ</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">0.91</div>
+                        <div class="stat-label">Cronbach's Alpha (Độ tin cậy cao)</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 6: Key Findings -->
+            <div class="findings-section">
+                <div class="findings-title">🎯 Kết Quả Chính</div>
+                <div class="findings-grid">
+                    <div class="finding-item">
+                        <div class="finding-label">✅ Giả thuyết được chấp nhận</div>
+                        <div class="finding-text">Khác biệt giá trị là yếu tố dự báo mạnh nhất (B=0.404, p<0.001)</div>
+                    </div>
+                    <div class="finding-item">
+                        <div class="finding-label">✅ Giả thuyết được chấp nhận</div>
+                        <div class="finding-text">Giao tiếp cởi mở giảm mâu thuẫn đáng kể (B=-0.260, p<0.001)</div>
+                    </div>
+                    <div class="finding-item">
+                        <div class="finding-label">✅ Giả thuyết được chấp nhận</div>
+                        <div class="finding-text">Môi trường số tác động đến khác biệt giá trị (B=0.409, p<0.001)</div>
+                    </div>
+                    <div class="finding-item negative">
+                        <div class="finding-label">⚠️ Dữ liệu chưa ủng hộ rõ</div>
+                        <div class="finding-text">Vai trò điều tiết của giao tiếp (p=0.712)</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 7: Solutions -->
+            <div class="solutions-section">
+                <div class="solutions-title">💡 Giải Pháp Giảm Mâu Thuẫn</div>
+                <div class="solutions-grid">
+                    <div class="solution-item">
+                        <h4>👨‍👩‍👧 Cấp Độ Gia Đình</h4>
+                        <p>Chuyển từ kiểm soát hành vi sang hiểu mục đích. Hỏi rõ tại sao con dùng mạng, hỗ trợ thay vì cấm.</p>
+                    </div>
+                    <div class="solution-item">
+                        <h4>🗣️ Kỹ Năng Giao Tiếp</h4>
+                        <p>Xây dựng quy tắc đối thoại: lắng nghe → giải thích → thương lượng. Tránh bắt đầu bằng phán xét.</p>
+                    </div>
+                    <div class="solution-item">
+                        <h4>🎓 Cấp Độ Nhà Trường</h4>
+                        <p>Workshop về giao tiếp liên thế hệ, quyền riêng tư số, an toàn thông tin, thỏa thuận gia đình.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="footer">
+                <strong>Kết Luận:</strong> Mâu thuẫn thế hệ không chỉ từ tuổi tác mà từ điều kiện xã hội hóa khác nhau. Thay vì cấm hay kiểm soát, gia đình cần giao tiếp cởi mở để thấu hiểu nhau.
+            </div>
+        </div>
+    </div>
+
+    <!-- Presentation Script -->
+    <div class="presentation-script" id="script">
+        <h2 style="color: #2c3e50; margin-bottom: 20px;">📜 Kịch Bản Thuyết Trình Poster</h2>
+
+        <div class="script-section">
+            <h3>🎯 MỞ ĐẦU (30 giây)</h3>
+            <p><strong>"Xin chào các bạn, hôm nay nhóm muốn chia sẻ một câu hỏi mà có lẽ ai trong chúng ta cũng từng gặp: vì sao cha mẹ cứ phản đối hành động của chúng ta, đặc biệt là khi dùng điện thoại hoặc mạng xã hội?"</strong></p>
+            <p>"Nhóm đã nghiên cứu 164 người trẻ và phỏng vấn 7 cặp gia đình để tìm câu trả lời. Và phát hiện rất thú vị là: mâu thuẫn giữa cha mẹ và con cái không chỉ vì tuổi tác, mà chủ yếu vì điều kiện xã hội mà hai thế hệ lớn lên hoàn toàn khác nhau."</p>
+        </div>
+
+        <div class="script-section">
+            <h3>📍 PHẦN 1: Điều Kiện Xã Hội Hóa Khác (60 giây)</h3>
+            <p><strong>"Trước tiên, hãy nhìn vào hai dòng thời gian này:"</strong></p>
+            <p><strong>• Thế hệ cha mẹ</strong> lớn lên với sách vở, lớp học truyền thống, báo giấy, giao tiếp trực tiếp. Họ học để có công việc ổn định lâu dài. Giá trị quan trọng của họ là trách nhiệm tập thể, tuân thủ, tính ổn định.</p>
+            <p><strong>• Thế hệ chúng ta</strong> lớn lên với Google, YouTube, TikTok, mạng xã hội. Chúng ta học thông qua app, video, collaboration online. Chúng ta tìm việc qua portfolio, freelance, flexible. Giá trị của chúng ta là tự chủ, khám phá, thể hiện bản thân.</p>
+            <p>"Hai bối cảnh hoàn toàn khác nhau này tạo ra những nhóm tư duy, cách làm việc, và cách sống khác biệt."</p>
+        </div>
+
+        <div class="script-section">
+            <h3>🌐 PHẦN 2: Khác Biệt Môi Trường Số (50 giây)</h3>
+            <p><strong>"Thứ hai, về môi trường số:"</strong></p>
+            <p>"Cha mẹ được gọi là 'Digital Immigrants' - phải thích nghi sau. Với họ, mạng xã hội là công cụ xa lạ, đầy rủi ro. Họ lo con bị lừa đảo, bị lộ thông tin riêng tư, hoặc bị ảnh hưởng tiêu cực."</p>
+            <p>"Chúng ta là 'Digital Natives' - lớn lên cùng công nghệ. Với chúng ta, mạng xã hội là không gian giao tiếp bình thường, nơi học tập, kết nối, thể hiện bản thân."</p>
+            <p>"Dữ liệu cho thấy: 76.2% chúng ta dùng Internet từ 3 giờ trở lên mỗi ngày. Cha mẹ cảm thấy khó theo kịp (3.823/5 điểm). Và 33.5% xung đột trong gia đình liên quan trực tiếp đến mạng xã hội."</p>
+        </div>
+
+        <div class="script-section">
+            <h3>⚡ PHẦN 3: Khác Biệt Giá Trị → Mâu Thuẫn (60 giây)</h3>
+            <p><strong>"Thứ ba, và đây là phát hiện quan trọng nhất: những khác biệt trong điều kiện xã hội hóa dẫn đến khác biệt về giá trị."</strong></p>
+            <p>"Nhóm đã xác định 4 vùng bất đồng chính:"</p>
+            <ul>
+                <li><strong>Học tập:</strong> Cha mẹ muốn con chuẩn bị kỹ lưỡng, còn con chỉ muốn trải nghiệm.</li>
+                <li><strong>Nghề nghiệp:</strong> Cha mẹ muốn ổn định, còn con muốn phát triển và khám phá.</li>
+                <li><strong>Bạn bè & tình yêu:</strong> Cha mẹ muốn kiểm soát, còn con muốn tự chủ.</li>
+                <li><strong>Thời gian & điện thoại:</strong> Cha mẹ muốn kỷ luật, còn con muốn tự quản lý.</li>
+            </ul>
+            <p><strong>"Kết quả thống kê cho thấy: khác biệt giá trị có tương quan với mâu thuẫn mạnh nhất (r = 0.615, p < 0.01). Nói cách khác, công nghệ không là nguyên nhân gốc, mà là bộc lộ những khác biệt sâu hơn về giá trị."</strong></p>
+        </div>
+
+        <div class="script-section">
+            <h3>💬 PHẦN 4: Giao Tiếp Gia Đình là Giải Pháp (60 giây)</h3>
+            <p><strong>"Vậy giải pháp là gì? Câu trả lời là: giao tiếp gia đình cởi mở."</strong></p>
+            <p>"Trong dữ liệu của nhóm, những gia đình có khác biệt giá trị nhưng vẫn hạnh phúc là những gia đình có giao tiếp tốt. Cha mẹ lắng nghe tại sao con dùng mạng xã hội, con nói rõ ràng mục đích, cùng nhau thỏa thuận quy tắc."</p>
+            <p>"Giao tiếp cởi mở làm gì?"</p>
+            <ul>
+                <li><strong>Giảm mâu thuẫn trực tiếp:</strong> B = -0.260 (p < 0.001)</li>
+                <li><strong>Tìm điểm chung:</strong> Nghe lý do trước khi phán xét</li>
+                <li><strong>Xây dựng tin tưởng:</strong> Thương lượng thay vì áp đặt</li>
+            </ul>
+        </div>
+
+        <div class="script-section">
+            <h3>🎯 PHẦN 5: Giải Pháp Cụ Thể (60 giây)</h3>
+            <p><strong>"Giải pháp không phải là cấm Internet hay kiểm soát liên tục, mà là:"</strong></p>
+            <p><strong>1. Cấp Độ Gia Đình:</strong> Cha mẹ cần chuyển từ kiểm soát hành vi sang hiểu mục đích. Thay vì "Con cứ ôm điện thoại suốt ngày", hãy hỏi "Con đang làm gì? Là học, làm việc, hay giải trí?". Từ đó, cùng thống nhất quy tắc.</p>
+            <p><strong>2. Kỹ Năng Giao Tiếp:</strong> Áp dụng 3 bước:
+            <ul>
+                <li>LẮNG NGHE: Hỏi động cơ con, không phán xét ngay</li>
+                <li>GIẢI THÍCH: Chia sẻ nỗi lo của cha mẹ</li>
+                <li>THƯƠNG LƯỢNG: Đặt quy tắc cùng nhau</li>
+            </ul>
+            </p>
+            <p><strong>3. Cấp Độ Nhà Trường:</strong> Tổ chức workshop về giao tiếp liên thế hệ, quyền riêng tư số, an toàn thông tin."</p>
+        </div>
+
+        <div class="script-section">
+            <h3>✨ KẾT LUẬN (30 giây)</h3>
+            <p><strong>"Mâu thuẫn thế hệ là hiện tượng bình thường trong chuyển đổi xã hội. Nhưng chúng ta có thể giảm thiểu nó bằng cách:"</strong></p>
+            <ul>
+                <li>Hiểu rằng cha mẹ lo vì yêu thương, không vì muốn kiểm soát</li>
+                <li>Cha mẹ nhận biết rằng thế hệ con cái có thách thức khác, không phải sướng hơn</li>
+                <li>Cả hai phía cùng LẮNG NGHE, GIẢI THÍCH, và THƯƠNG LƯỢNG</li>
+            </ul>
+            <p>"Công nghệ không phải kẻ thù, mà công cụ. Khoá mở của mâu thuẫn thế hệ là: một cuộc hội thoại thằng thắn và tôn trọng lẫn nhau."</p>
+            <p><strong>"Cảm ơn các bạn đã lắng nghe! Nhóm sẵn sàng trả lời các câu hỏi."</strong></p>
+        </div>
+
+        <div class="script-section">
+            <h3>📌 GỢI Ý TRỊ ĐỦ HỎWP</h3>
+            <ul>
+                <li><strong>Tại sao chỉ khảo sát người con?</strong> Vì dữ liệu từ hai phía là thách thức, nhưng điều đó là hạn chế và nhóm đã ghi rõ trong báo cáo.</li>
+                <li><strong>Làm sao biết giao tiếp cởi mở thật sự giảm mâu thuẫn?</strong> Dữ liệu cho thấy tương quan âm (r = -0.503, p < 0.01), nhưng đây là thiết kế cắt ngang, không chứng minh nhân quả 100%.</li>
+                <li><strong>Có những chủ đề mâu thuẫn nào khác không?</strong> Có, nhưng dữ liệu tập trung vào mạng xã hội (33.5%), nghề nghiệp (15.9%), bạn bè (14%), điều này phản ánh bối cảnh hiện tại.</li>
+            </ul>
+        </div>
+    </div>
+
+    <button class="toggle-button" onclick="toggleScript()">📜 Xem Kịch Bản Thuyết Trình</button>
+
+    <script>
+        function toggleScript() {
+            const script = document.getElementById('script');
+            script.classList.toggle('active');
+            
+            // Scroll to script if showing
+            if (script.classList.contains('active')) {
+                setTimeout(() => {
+                    script.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 100);
+            }
+        }
+
+        // Add scroll reveal animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.6s ease forwards';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.section, .stats-section, .findings-section, .solutions-section').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Add fadeInUp animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
