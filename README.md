@@ -1,38 +1,35 @@
 # mln131-final
 
-Landing page trình bày dự án nghiên cứu **RBL MLN131** —
-**"Mâu thuẫn thế hệ trong gia đình số: Khác biệt cha mẹ – con cái là khác biệt tuổi tác hay khác biệt điều kiện xã hội?"**
+Website trình bày tương tác (interactive scrollytelling) cho dự án nghiên cứu RBL MLN131:
+**"Mâu thuẫn thế hệ trong gia đình số – Khác biệt cha mẹ và con cái là khác biệt tuổi tác hay khác biệt điều kiện xã hội?"**
 
-Xây dựng theo phong cách một creative-studio landing page, nhưng toàn bộ nội dung được biên tập lại từ dữ liệu nghiên cứu của nhóm.
+Xây dựng bằng **React + Three.js** với hiệu ứng chuyển cảnh mượt, nền 3D động và animation theo cuộn (scroll-driven).
 
 ## Công nghệ
 
-- **React 18 + TypeScript + Vite**
-- **Tailwind CSS** — toàn bộ giao diện, nền trắng, hệ màu tối #051A24 / #0D212C
-- **lucide-react** — icon
-- Hiệu ứng thuần CSS + IntersectionObserver: marquee vô tận, fade-in-up theo cuộn, parallax, mouse-trail
+- [React 18](https://react.dev/) + [Vite](https://vitejs.dev/) — nền tảng & build
+- [Three.js](https://threejs.org/) qua [@react-three/fiber](https://docs.pmnd.rs/react-three-fiber) + [@react-three/drei](https://github.com/pmndrs/drei) — nền 3D động (hai "đám mây hạt" thế hệ, quả cầu mâu thuẫn, camera bay theo cuộn)
+- [Framer Motion](https://www.framer.com/motion/) — reveal animation, đếm số, thanh tiến trình
+- [Lenis](https://github.com/darkroomengineering/lenis) — smooth scroll, đồng bộ với render loop 3D
 
-> Ghi chú: font gốc PP Neue Montreal / PP Mondwest là font thương mại nên được thay
-> bằng Google Fonts hỗ trợ tiếng Việt: **Be Vietnam Pro** (body) + **Playfair Display** (serif nhấn).
-> Ảnh GIF stock được thay bằng các thẻ visual gradient đúng chủ đề gia đình số.
+## Mạch nội dung (flow)
 
-## Bố cục (theo prompt landing page)
-
-1. **Hero** — tiêu đề nghiên cứu + 3 đoạn giới thiệu
-2. **Marquee** — dải khái niệm cuộn vô tận (sách vở ↔ TikTok…)
-3. **Quote** — trích dẫn cốt lõi + parallax, "logo" là các khung lý thuyết (Mannheim, Prensky, Olson)
-4. **Cơ chế** (pricing-style) — 2 cơ chế mạnh nhất: Khác biệt giá trị (r = 0.615) & Giao tiếp cởi mở (B = -0.260)
-5. **Các gia đình nói gì** — carousel 7 cặp gia đình phỏng vấn
-6. **Hành trình** (projects) — 3 mắt xích mô hình + bảng kiểm định giả thuyết H1–H5
-7. **Partner** — CTA tương tác mouse-trail "Giao tiếp + Tin tưởng"
-8. **Footer + Copyright + Bottom nav**
+1. **Mở đầu** — Đặt vấn đề
+2. **Điều kiện xã hội hóa** — Hai thế hệ, hai bối cảnh lớn lên
+3. **Môi trường số** — Digital Natives vs Digital Immigrants
+4. **Khác biệt giá trị** — 4 vùng bất đồng & tương quan mạnh nhất (r = 0.615)
+5. **Giao tiếp gia đình** — 3 bước đối thoại (B = -0.260)
+6. **Dữ liệu** — 164 mẫu, độ tin cậy thang đo (Cronbach's Alpha)
+7. **Kết quả** — Kiểm định giả thuyết H1–H6, R² = 46.4%
+8. **Giải pháp** — 3 cấp độ + insight 7 cặp gia đình
+9. **Kết luận** — Giao tiếp + Tin tưởng
 
 ## Chạy dự án
 
 ```bash
 npm install
-npm run dev      # môi trường phát triển
-npm run build    # type-check + build production vào /dist
+npm run dev      # chạy môi trường phát triển
+npm run build    # build production vào /dist
 npm run preview  # xem thử bản build
 ```
 
@@ -40,14 +37,15 @@ npm run preview  # xem thử bản build
 
 ```
 src/
-├─ App.tsx                      # hero + marquee + composition
-├─ data/content.ts             # toàn bộ nội dung nghiên cứu (typed)
-├─ hooks/useInViewAnimation.ts # IntersectionObserver scroll trigger
-├─ components/                 # Button, FadeIn, VisualTile, các section
-└─ index.css                  # fonts, marquee, fade-in-up, mouse-trail
+├─ three/Scene.jsx        # nền 3D (react-three-fiber)
+├─ store/scroll.js        # state cuộn chia sẻ giữa Lenis và render loop
+├─ components/            # Nav, Progress, Reveal, Counter
+├─ sections/              # 9 cảnh nội dung
+├─ data/content.js        # toàn bộ dữ liệu nghiên cứu
+└─ styles/global.css      # design system
 ```
 
-Tài liệu nghiên cứu gốc nằm trong [`docs/`](./docs).
+Tài liệu nghiên cứu gốc nằm trong thư mục [`docs/`](./docs).
 
 ---
 
