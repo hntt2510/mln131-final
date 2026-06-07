@@ -1,21 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap');
 
 :root {
-  --bg: #070b1a;
-  --bg-soft: #0b1228;
-  --ink: #eef2ff;
-  --muted: #9aa6c8;
-  --line: rgba(255, 255, 255, 0.1);
+  --bg: #141a30;
+  --bg-soft: #1c2444;
+  --ink: #f3f6ff;
+  --muted: #aeb8d8;
+  --line: rgba(255, 255, 255, 0.14);
 
-  --parent: #ff5b7f;
-  --parent-2: #ffb05b;
-  --child: #5b8cff;
-  --child-2: #43e0c0;
+  --parent: #ff6f8e;
+  --parent-2: #ffb86b;
+  --child: #6c9bff;
+  --child-2: #4fe6c8;
 
-  --glass: rgba(255, 255, 255, 0.05);
-  --glass-strong: rgba(255, 255, 255, 0.08);
+  --glass: rgba(255, 255, 255, 0.065);
+  --glass-strong: rgba(255, 255, 255, 0.11);
   --radius: 20px;
-  --shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+  --shadow: 0 24px 60px rgba(0, 0, 0, 0.38);
 
   --maxw: 1180px;
 }
@@ -82,12 +82,9 @@ h3 {
   inset: 0;
   z-index: 1;
   pointer-events: none;
-  background: radial-gradient(
-      120% 80% at 50% 0%,
-      transparent 40%,
-      rgba(5, 8, 20, 0.55) 100%
-    ),
-    radial-gradient(100% 60% at 50% 110%, rgba(5, 8, 20, 0.8), transparent 60%);
+  background: radial-gradient(85% 55% at 78% 0%, rgba(255, 150, 115, 0.14), transparent 55%),
+    radial-gradient(75% 55% at 14% 6%, rgba(120, 155, 255, 0.12), transparent 55%),
+    radial-gradient(120% 85% at 50% 120%, rgba(8, 11, 26, 0.5), transparent 62%);
 }
 
 /* ---------- content layer ---------- */

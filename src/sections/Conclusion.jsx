@@ -25,6 +25,13 @@ export default function Conclusion({ lenis }) {
           <div className="key-line">🔑 {conclusion.key}</div>
         </Reveal>
 
+        <Reveal delay={2} className="media media-center">
+          <img src="/img/fam4.jpg" alt="Gia đình cùng nhau bước trên con đường" loading="lazy" />
+          <div className="cap">
+            Đồng hành thay vì đối đầu — <b>cùng nhau bước tiếp</b>
+          </div>
+        </Reveal>
+
         <Reveal delay={1}>
           <div className="team">
             {team.map((m) => (

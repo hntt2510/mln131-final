@@ -47,6 +47,13 @@ export default function Hero({ lenis }) {
           <span><b>7</b> cặp gia đình</span>
           <span>r = <b>0.615</b> tương quan mạnh nhất</span>
         </motion.div>
+
+        <motion.div className="media hero-photo" variants={item}>
+          <img src="/img/fam1.jpg" alt="Gia đình ba thế hệ trong đời sống số" loading="lazy" />
+          <div className="cap">
+            <b>Gia đình số</b> · nơi nhiều thế hệ cùng lớn lên giữa hai thế giới
+          </div>
+        </motion.div>
       </motion.div>
 
       <div className="scroll-hint">

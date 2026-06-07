@@ -51,6 +51,13 @@ export default function Socialization() {
           </div>
           <GenCard gen={socialization.child} delay={1} />
         </div>
+
+        <Reveal className="media media-center">
+          <img src="/img/fam3.jpg" alt="Hai thế hệ đối diện nhau" loading="lazy" />
+          <div className="cap">
+            Hai thế hệ <b>đối diện nhau</b> — khác biệt không nằm ở tuổi tác, mà ở bối cảnh lớn lên
+          </div>
+        </Reveal>
       </div>
     </section>
   )

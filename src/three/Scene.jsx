@@ -107,12 +107,12 @@ export default function Scene() {
       camera={{ position: [0, 0, 12], fov: 55 }}
       gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
     >
-      <color attach="background" args={['#070b1a']} />
-      <fog attach="fog" args={['#070b1a', 10, 26]} />
+      <color attach="background" args={['#141a30']} />
+      <fog attach="fog" args={['#141a30', 12, 30]} />
 
-      <ambientLight intensity={0.6} />
-      <pointLight position={[-6, 3, 4]} intensity={2.4} color="#ff6a86" />
-      <pointLight position={[6, -2, 4]} intensity={2.4} color="#5b8cff" />
+      <ambientLight intensity={0.8} />
+      <pointLight position={[-6, 3, 4]} intensity={2.6} color="#ff8a72" />
+      <pointLight position={[6, -2, 4]} intensity={2.6} color="#6c9bff" />
 
       <Stars radius={60} depth={40} count={1800} factor={3} saturation={0} fade speed={0.6} />
 

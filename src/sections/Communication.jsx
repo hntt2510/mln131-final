@@ -31,13 +31,21 @@ export default function Communication() {
           ))}
         </div>
 
-        <Reveal className="impact">
-          <div className="beta">{communicationImpact.beta}</div>
-          <div className="meta">
-            <b>{communicationImpact.text}</b>
-            <span className="p">{communicationImpact.p}</span>
-          </div>
-        </Reveal>
+        <div className="comm-grid">
+          <Reveal className="media">
+            <img src="/img/fam2.jpg" alt="Bàn tay các thế hệ đặt chồng lên nhau" loading="lazy" />
+            <div className="cap">
+              <b>Lắng nghe → Giải thích → Thương lượng</b> · sự kết nối bắt đầu từ thấu hiểu
+            </div>
+          </Reveal>
+          <Reveal delay={1} className="impact">
+            <div className="beta">{communicationImpact.beta}</div>
+            <div className="meta">
+              <b>{communicationImpact.text}</b>
+              <span className="p">{communicationImpact.p}</span>
+            </div>
+          </Reveal>
+        </div>
       </div>
     </section>
   )

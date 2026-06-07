@@ -512,11 +512,16 @@
 .hyp {
   display: flex;
   gap: 16px;
-  align-items: flex-start;
+  align-items: stretch;
   padding: 22px 24px;
   border-radius: 16px;
   border: 1px solid var(--line);
-  background: var(--glass);
+  background: var(--glass-strong);
+  transition: transform 0.3s, border-color 0.3s;
+}
+.hyp:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 255, 255, 0.22);
 }
 .hyp .id {
   font-family: 'Space Grotesk', sans-serif;
@@ -537,20 +542,28 @@
   background: rgba(255, 176, 91, 0.16);
   color: var(--parent-2);
 }
+.hyp .body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+}
 .hyp .body b {
   display: block;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
   font-weight: 600;
 }
 .hyp .stat {
+  display: block;
+  margin-bottom: 12px;
   font-family: 'Space Grotesk', monospace;
   font-size: 0.82rem;
   color: var(--muted);
 }
 .hyp .badge {
   font-size: 0.74rem;
-  margin-top: 8px;
-  display: inline-block;
+  margin-top: auto;
+  align-self: flex-start;
   padding: 3px 10px;
   border-radius: 999px;
 }
@@ -585,6 +598,78 @@
   flex: 1;
   min-width: 260px;
   color: var(--muted);
+}
+
+/* ===================== PHOTO FRAMES ===================== */
+.media {
+  position: relative;
+  width: 100%;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+  background: var(--glass);
+}
+.media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s ease;
+}
+.media:hover img {
+  transform: scale(1.05);
+}
+.media .cap {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: 36px 20px 16px;
+  font-size: 0.85rem;
+  color: #fff;
+  background: linear-gradient(transparent, rgba(8, 11, 26, 0.82));
+}
+.media .cap b {
+  color: #fff;
+  font-weight: 600;
+}
+
+/* hero showcase photo */
+.hero-photo {
+  margin: 40px auto 0;
+  max-width: 420px;
+  aspect-ratio: 4 / 5;
+}
+
+/* centered single photo under a section */
+.media-center {
+  margin: 44px auto 0;
+  max-width: 460px;
+  aspect-ratio: 4 / 5;
+}
+
+/* communication: photo beside the impact bar */
+.comm-grid {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 22px;
+  align-items: stretch;
+  margin-top: 36px;
+}
+.comm-grid .media {
+  aspect-ratio: 3 / 4;
+}
+.comm-grid .impact {
+  margin: 0;
+}
+@media (max-width: 760px) {
+  .comm-grid {
+    grid-template-columns: 1fr;
+  }
+  .comm-grid .media {
+    aspect-ratio: 4 / 5;
+    max-width: 420px;
+    margin: 0 auto;
+  }
 }
 
 /* ===================== SOLUTIONS ===================== */
