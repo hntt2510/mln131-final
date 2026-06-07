@@ -22,7 +22,10 @@ export default function Solutions() {
         <div className="sol-grid">
           {solutions.map((s, i) => (
             <Reveal key={s.title} delay={i} className="sol">
-              <div className="ico">{s.icon}</div>
+              <div className="sol-top">
+                <div className="ico">{s.icon}</div>
+                {s.tag && <span className="sol-tag">{s.tag}</span>}
+              </div>
               <h3>{s.title}</h3>
               <p>{s.desc}</p>
             </Reveal>

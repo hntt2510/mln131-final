@@ -1,6 +1,6 @@
 import Reveal from '../components/Reveal'
 import Counter from '../components/Counter'
-import { valueZones, strongestCorrelation } from '../data/content'
+import { valueZones, strongestCorrelation, valuesEmphasis } from '../data/content'
 
 export default function Values() {
   return (
@@ -36,6 +36,11 @@ export default function Values() {
             </Reveal>
           ))}
         </div>
+
+        <Reveal className="emphasis">
+          <span className="quote-mark">“</span>
+          {valuesEmphasis}
+        </Reveal>
 
         <Reveal className="corr">
           <div className="big">r = <Counter value={strongestCorrelation.r} /></div>

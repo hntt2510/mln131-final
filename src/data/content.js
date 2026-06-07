@@ -25,6 +25,36 @@ export const coreFlow = [
   'Giải pháp: Giao tiếp cởi mở',
 ]
 
+// Section 0 — Vì sao mâu thuẫn xảy ra (cùng hành vi, hai cách hiểu)
+export const problem = {
+  behavior: 'Dùng điện thoại nhiều giờ mỗi ngày',
+  parent: {
+    label: 'Góc nhìn cha mẹ',
+    icon: '👨‍👩‍👧',
+    points: [
+      'Có thể là đang lãng phí thời gian',
+      'Lo con xao nhãng việc học, ít tập trung',
+      'Lo về nội dung và người con gặp trên mạng',
+    ],
+  },
+  child: {
+    label: 'Góc nhìn con cái',
+    icon: '🧑‍💻',
+    points: [
+      'Đang học nhóm, tra cứu và làm bài tập',
+      'Kết nối bạn bè, giải tỏa căng thẳng',
+      'Học kỹ năng mới và thể hiện bản thân',
+    ],
+  },
+  insight:
+    'Cùng một hành vi nhưng hai thế hệ gán cho nó hai ý nghĩa khác nhau — đó là nơi mâu thuẫn bắt đầu.',
+}
+
+export const valuesEmphasis =
+  'Công nghệ không phải vấn đề duy nhất. Vấn đề nằm ở cách hai thế hệ gán ý nghĩa khác nhau cho cùng một hành vi.'
+
+export const communicationEmphasis = 'Cách chúng ta nói thay đổi cách chúng ta nghe.'
+
 // Section 1 — Điều kiện xã hội hóa
 export const socialization = {
   parent: {
@@ -151,17 +181,20 @@ export const solutions = [
   {
     icon: '👨‍👩‍👧',
     title: 'Cấp độ gia đình',
-    desc: 'Chuyển từ kiểm soát hành vi sang hiểu mục đích. Hỏi rõ con đang làm gì, hỗ trợ thay vì cấm đoán.',
+    tag: 'Hiểu mục đích',
+    desc: 'Chuyển từ kiểm soát hành vi sang hiểu mục đích — hỏi con đang làm gì và vì sao, đồng hành thay vì cấm đoán.',
   },
   {
-    icon: '🗣️',
-    title: 'Kỹ năng giao tiếp',
-    desc: 'Xây dựng quy tắc đối thoại: lắng nghe → giải thích → thương lượng. Tránh mở đầu bằng phán xét.',
+    icon: '🧠',
+    title: 'Cấp độ cá nhân',
+    tag: 'Kỹ năng hai chiều',
+    desc: 'Cha mẹ học thêm kỹ năng số; người trẻ rèn tự quản lý thời gian và tư duy phản biện trước thông tin.',
   },
   {
     icon: '🎓',
-    title: 'Cấp độ nhà trường',
-    desc: 'Workshop giao tiếp liên thế hệ, quyền riêng tư số, an toàn thông tin, thỏa thuận gia đình.',
+    title: 'Nhà trường & xã hội',
+    tag: 'Hỗ trợ hệ thống',
+    desc: 'Workshop giao tiếp liên thế hệ, quyền riêng tư số, an toàn thông tin và mẫu thỏa thuận gia đình.',
   },
 ]
 
@@ -217,9 +250,129 @@ export const conclusion = {
   key: 'Công nghệ là công cụ, không phải kẻ thù. Khóa mở của mâu thuẫn = Giao tiếp + Tin tưởng.',
 }
 
+// Mô hình nghiên cứu (flow diagram)
+export const modelFlow = {
+  inputs: [
+    { code: 'XHH', label: 'Khác biệt điều kiện xã hội hóa', b: 'B = 0.399' },
+    { code: 'MTS', label: 'Khác biệt môi trường số', b: 'B = 0.409' },
+  ],
+  mediator: { code: 'KBG', label: 'Khác biệt giá trị' },
+  outcome: { code: 'MTTH', label: 'Mâu thuẫn thế hệ' },
+  link: 'B = 0.404 · p < .001',
+  moderator: {
+    code: 'GTGD',
+    label: 'Giao tiếp gia đình cởi mở',
+    b: 'B = -0.260 · p < .001',
+  },
+}
+
+// Dữ liệu cho biểu đồ (recharts)
+export const charts = {
+  // Khu vực sinh sống của mẫu khảo sát
+  area: [
+    { name: 'Thành thị', value: 73.2 },
+    { name: 'Nông thôn', value: 26.8 },
+  ],
+  // Nhóm tuổi
+  age: [
+    { name: '19–22 tuổi', value: 68.3 },
+    { name: 'Nhóm khác', value: 31.7 },
+  ],
+  // Thời lượng dùng Internet / mạng xã hội mỗi ngày
+  usage: [
+    { name: '≥ 3 giờ/ngày', value: 76.2 },
+    { name: '< 3 giờ/ngày', value: 23.8 },
+  ],
+  // Độ tin cậy thang đo (Cronbach's Alpha)
+  reliability: [
+    { name: 'XHH', alpha: 0.867 },
+    { name: 'MTS', alpha: 0.893 },
+    { name: 'GTGD', alpha: 0.889 },
+    { name: 'KBG', alpha: 0.886 },
+    { name: 'MTTH', alpha: 0.908 },
+  ],
+  // Hệ số hồi quy B của các giả thuyết chính
+  beta: [
+    { name: 'XHH → KBG', b: 0.399 },
+    { name: 'MTS → KBG', b: 0.409 },
+    { name: 'KBG → MTTH', b: 0.404 },
+    { name: 'GTGD → MTTH', b: -0.26 },
+  ],
+}
+
+// Kịch bản thuyết trình (presenter mode)
+export const presenterScript = [
+  {
+    time: '0:00 – 0:30',
+    title: 'Mở đầu',
+    cue: 'Đặt câu hỏi & tạo tò mò',
+    notes: [
+      'Vì sao cha mẹ và con cái hay bất đồng? Không phải vì "cha mẹ già" mà vì cha mẹ lớn lên trong một thế giới khác.',
+      'PAUSE sau câu "…lớn lên trong thế giới khác" để khán giả tự ngẫm.',
+    ],
+  },
+  {
+    time: '0:30 – 1:30',
+    title: 'Điều kiện xã hội hóa',
+    cue: 'Hai bối cảnh lớn lên',
+    notes: [
+      'Cha mẹ: sách vở, báo giấy, nghề ổn định → giá trị trách nhiệm, tập thể.',
+      'Con cái: Internet, mạng xã hội, linh hoạt → giá trị tự chủ, khám phá.',
+      'Nhấn mạnh: hai bối cảnh, hai bộ giá trị — không ai sai.',
+    ],
+  },
+  {
+    time: '1:30 – 2:20',
+    title: 'Môi trường số',
+    cue: 'Digital Natives vs Immigrants',
+    notes: [
+      'Cha mẹ thấy mạng xã hội là công cụ xa lạ; con cái thấy đó là không gian sống bình thường.',
+      'Con số: 76.2% online ≥ 3h/ngày, 33.5% bất đồng liên quan tới mạng, 3.823/5 cha mẹ khó theo kịp.',
+    ],
+  },
+  {
+    time: '2:20 – 3:20',
+    title: 'Khác biệt giá trị',
+    cue: 'Bốn vùng bất đồng',
+    notes: [
+      'Học tập, nghề nghiệp, bạn bè/tình yêu, điện thoại — mỗi bên gán ý nghĩa khác nhau.',
+      'DỪNG ở con số 0.615 — tương quan mạnh nhất: giá trị mới là gốc rễ, không phải công nghệ.',
+    ],
+  },
+  {
+    time: '3:20 – 4:20',
+    title: 'Giao tiếp cởi mở',
+    cue: 'Giải pháp cảm xúc',
+    notes: [
+      'Ba bước: Lắng nghe → Giải thích → Thương lượng.',
+      'Câu chốt: "Cách chúng ta nói thay đổi cách chúng ta nghe." Giao tiếp cởi mở làm giảm mâu thuẫn (B = -0.260).',
+    ],
+  },
+  {
+    time: '4:20 – 5:20',
+    title: 'Giải pháp 3 cấp độ',
+    cue: 'Gia đình · Cá nhân · Xã hội',
+    notes: [
+      'Gia đình: hiểu mục đích thay vì chỉ kiểm soát hành vi.',
+      'Cá nhân: cha mẹ học kỹ năng số, con học tự quản & tư duy phản biện.',
+      'Nhà trường/xã hội: workshop, an toàn thông tin, thỏa thuận gia đình.',
+    ],
+  },
+  {
+    time: '5:20 – 5:50',
+    title: 'Kết luận',
+    cue: 'Kết thúc tích cực',
+    notes: [
+      'Công nghệ là công cụ, không phải kẻ thù.',
+      'MỈM CƯỜI khi nói "tin tưởng": khóa mở của mâu thuẫn = Giao tiếp + Tin tưởng.',
+    ],
+  },
+]
+
 // Cấu trúc điều hướng giữa các "cảnh"
 export const navItems = [
   { id: 'hero', label: 'Mở đầu' },
+  { id: 'problem', label: 'Vì sao mâu thuẫn' },
   { id: 'socialization', label: 'Xã hội hóa' },
   { id: 'digital', label: 'Môi trường số' },
   { id: 'values', label: 'Khác biệt giá trị' },

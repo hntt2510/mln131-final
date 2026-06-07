@@ -1,6 +1,7 @@
 import Reveal from '../components/Reveal'
 import Counter from '../components/Counter'
-import { hypotheses, modelFit } from '../data/content'
+import { BetaBars } from '../components/Charts'
+import { hypotheses, modelFit, modelFlow, charts } from '../data/content'
 
 export default function Findings() {
   return (
@@ -21,6 +22,36 @@ export default function Findings() {
           </Reveal>
         </div>
 
+        {/* Mô hình nghiên cứu */}
+        <Reveal className="flow">
+          <div className="flow-inputs">
+            {modelFlow.inputs.map((n) => (
+              <div className="flow-node in" key={n.code}>
+                <b>{n.code}</b>
+                <span>{n.label}</span>
+                <em>{n.b}</em>
+              </div>
+            ))}
+          </div>
+          <div className="flow-arrow" aria-hidden="true">→</div>
+          <div className="flow-node mediator">
+            <b>{modelFlow.mediator.code}</b>
+            <span>{modelFlow.mediator.label}</span>
+          </div>
+          <div className="flow-arrow" aria-hidden="true">
+            <em>{modelFlow.link}</em>→
+          </div>
+          <div className="flow-node outcome">
+            <b>{modelFlow.outcome.code}</b>
+            <span>{modelFlow.outcome.label}</span>
+          </div>
+          <div className="flow-mod">
+            <span className="mod-tag">Giảm mâu thuẫn</span>
+            <b>{modelFlow.moderator.code}</b> · {modelFlow.moderator.label}
+            <em>{modelFlow.moderator.b}</em>
+          </div>
+        </Reveal>
+
         <div className="hyp-grid">
           {hypotheses.map((h, i) => (
             <Reveal key={h.id} delay={i % 2} className={`hyp ${h.status}`}>
@@ -35,6 +66,12 @@ export default function Findings() {
             </Reveal>
           ))}
         </div>
+
+        <Reveal className="chart-card wide">
+          <h4>Hệ số hồi quy B của các tác động chính</h4>
+          <div className="hint">Cột tím = tác động làm tăng · cột xanh = tác động làm giảm mâu thuẫn</div>
+          <BetaBars data={charts.beta} />
+        </Reveal>
 
         <Reveal className="fit">
           <div className="r2"><Counter value={modelFit.r2} /></div>

@@ -1,7 +1,7 @@
-import { motion } from 'framer-motion'
 import Reveal from '../components/Reveal'
 import Counter from '../components/Counter'
-import { sampleStats, reliability } from '../data/content'
+import { ShareDonut, AlphaBars } from '../components/Charts'
+import { sampleStats, charts } from '../data/content'
 
 export default function Data() {
   return (
@@ -31,27 +31,25 @@ export default function Data() {
           ))}
         </div>
 
-        <Reveal className="reliab">
-          <h3>Độ tin cậy thang đo</h3>
-          <div className="hint">Cronbach's Alpha — tất cả thang đo đều &gt; 0.8 (độ tin cậy cao)</div>
-          {reliability.map((r, i) => (
-            <div className="bar-row" key={r.code}>
-              <div className="name">
-                {r.code}
-                <small>{r.name}</small>
-              </div>
-              <div className="bar-track">
-                <motion.div
-                  className="bar-fill"
-                  initial={{ width: 0 }}
-                  whileInView={{ width: `${(r.alpha / 1) * 100}%` }}
-                  viewport={{ once: true, margin: '-10% 0px' }}
-                  transition={{ duration: 1.1, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
-                />
-              </div>
-              <div className="val">{r.alpha.toFixed(3)}</div>
-            </div>
-          ))}
+        <div className="chart-grid">
+          <Reveal className="chart-card">
+            <h4>Khu vực sinh sống</h4>
+            <ShareDonut data={charts.area} colors={['#38bdf8', 'rgba(255,255,255,0.08)']} />
+          </Reveal>
+          <Reveal delay={1} className="chart-card">
+            <h4>Nhóm tuổi 19–22</h4>
+            <ShareDonut data={charts.age} colors={['#8b5cf6', 'rgba(255,255,255,0.08)']} />
+          </Reveal>
+          <Reveal delay={2} className="chart-card">
+            <h4>Dùng Internet ≥ 3 giờ/ngày</h4>
+            <ShareDonut data={charts.usage} colors={['#22d3ee', 'rgba(255,255,255,0.08)']} />
+          </Reveal>
+        </div>
+
+        <Reveal className="chart-card wide">
+          <h4>Độ tin cậy thang đo — Cronbach's Alpha</h4>
+          <div className="hint">Tất cả thang đo đều &gt; 0.8 (độ tin cậy cao)</div>
+          <AlphaBars data={charts.reliability} />
         </Reveal>
       </div>
     </section>

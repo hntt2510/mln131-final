@@ -1,12 +1,11 @@
 import { useEffect, useRef, useState } from 'react'
 import Lenis from 'lenis'
-import Scene from './three/Scene'
 import Nav from './components/Nav'
 import Progress from './components/Progress'
-import { scrollState } from './store/scroll'
 import './sections/sections.css'
 
 import Hero from './sections/Hero'
+import Problem from './sections/Problem'
 import Socialization from './sections/Socialization'
 import Digital from './sections/Digital'
 import Values from './sections/Values'
@@ -28,11 +27,6 @@ export default function App() {
     })
     setLenis(l)
 
-    l.on('scroll', ({ progress, velocity }) => {
-      scrollState.progress = progress ?? 0
-      scrollState.velocity = velocity ?? 0
-    })
-
     const raf = (time) => {
       l.raf(time)
       rafRef.current = requestAnimationFrame(raf)
@@ -47,13 +41,13 @@ export default function App() {
 
   return (
     <>
-      <Scene />
       <div className="bg-vignette" />
       <Progress />
       <Nav lenis={lenis} />
 
       <main className="content">
         <Hero lenis={lenis} />
+        <Problem />
         <Socialization />
         <Digital />
         <Values />

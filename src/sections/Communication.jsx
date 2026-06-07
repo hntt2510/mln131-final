@@ -1,5 +1,5 @@
 import Reveal from '../components/Reveal'
-import { dialogueSteps, communicationImpact } from '../data/content'
+import { dialogueSteps, communicationImpact, communicationEmphasis } from '../data/content'
 
 export default function Communication() {
   return (
@@ -20,13 +20,22 @@ export default function Communication() {
           </Reveal>
         </div>
 
-        <div className="steps">
+        <Reveal className="emphasis">
+          <span className="quote-mark">“</span>
+          {communicationEmphasis}
+        </Reveal>
+
+        <div className="timeline">
           {dialogueSteps.map((s, i) => (
-            <Reveal key={s.no} delay={i} className="step">
-              <span className="no">{s.no}</span>
-              <div className="ico">{s.icon}</div>
-              <h3>{s.title}</h3>
-              <p>{s.desc}</p>
+            <Reveal key={s.no} delay={i} className="tl-step">
+              <div className="tl-dot">
+                <span className="tl-ico">{s.icon}</span>
+              </div>
+              <div className="tl-body">
+                <span className="tl-no">Bước {s.no}</span>
+                <h3>{s.title}</h3>
+                <p>{s.desc}</p>
+              </div>
             </Reveal>
           ))}
         </div>
