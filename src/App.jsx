@@ -39,10 +39,35 @@ export default function App() {
     }
   }, [])
 
+  // Feature image cards: keyboard focusable + tap-to-reveal on touch devices
+  useEffect(() => {
+    const cards = Array.from(document.querySelectorAll('.media'))
+    cards.forEach((m) => m.setAttribute('tabindex', '0'))
+
+    const onPointerUp = (e) => {
+      if (e.pointerType !== 'touch') return
+      const card = e.target.closest('.media')
+      cards.forEach((m) => {
+        if (m !== card) m.classList.remove('is-active')
+      })
+      if (card) card.classList.toggle('is-active')
+    }
+    document.addEventListener('pointerup', onPointerUp)
+    return () => document.removeEventListener('pointerup', onPointerUp)
+  }, [])
+
+  const toTop = () => {
+    if (lenis) lenis.scrollTo(0, { duration: 1.4 })
+    else window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
   return (
     <>
       <div className="bg-vignette" />
       <Progress />
+      <button className="brand" onClick={toTop} aria-label="FPT University — về đầu trang">
+        <img src="/img/logo.png" alt="FPT University" />
+      </button>
       <Nav lenis={lenis} />
 
       <main className="content">
